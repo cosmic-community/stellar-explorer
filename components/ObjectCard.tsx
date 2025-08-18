@@ -54,34 +54,34 @@ export default function ObjectCard({ object, type }: ObjectCardProps) {
             {description}
           </p>
           
-          {type === 'star' && 'metadata' in object && (
+          {type === 'star' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {object.metadata?.magnitude && (
+              {'metadata' in object && object.metadata?.magnitude && (
                 <span>Magnitude: {object.metadata.magnitude}</span>
               )}
-              {object.metadata?.spectral_class?.value && (
+              {'metadata' in object && object.metadata?.spectral_class?.value && (
                 <span>Type: {object.metadata.spectral_class.value}</span>
               )}
             </div>
           )}
           
-          {type === 'constellation' && 'metadata' in object && (
+          {type === 'constellation' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {object.metadata?.hemisphere?.value && (
+              {'metadata' in object && object.metadata?.hemisphere?.value && (
                 <span>Hemisphere: {object.metadata.hemisphere.value}</span>
               )}
-              {object.metadata?.best_viewing_season?.value && (
+              {'metadata' in object && object.metadata?.best_viewing_season?.value && (
                 <span>Best: {object.metadata.best_viewing_season.value}</span>
               )}
             </div>
           )}
           
-          {type === 'galaxy' && 'metadata' in object && (
+          {type === 'galaxy' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {object.metadata?.galaxy_type?.value && (
+              {'metadata' in object && object.metadata?.galaxy_type?.value && (
                 <span>Type: {object.metadata.galaxy_type.value}</span>
               )}
-              {object.metadata?.distance && (
+              {'metadata' in object && object.metadata?.distance && (
                 <span>Distance: {object.metadata.distance}</span>
               )}
             </div>

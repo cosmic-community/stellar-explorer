@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Star, Telescope, Galaxy } from 'lucide-react'
+import { Star, Sparkles, Globe } from 'lucide-react'
 
 export default function Header() {
   return (
@@ -23,14 +23,14 @@ export default function Header() {
               href="/constellations" 
               className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Telescope className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" />
               <span>Constellations</span>
             </Link>
             <Link 
               href="/galaxies" 
               className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Galaxy className="w-4 h-4" />
+              <Globe className="w-4 h-4" />
               <span>Galaxies</span>
             </Link>
           </div>

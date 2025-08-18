@@ -1,4 +1,4 @@
-import { Star, Telescope, Galaxy } from 'lucide-react'
+import { Star, Sparkles, Globe } from 'lucide-react'
 import Link from 'next/link'
 import { getStars, getConstellations, getGalaxies } from '@/lib/cosmic'
 import ObjectCard from '@/components/ObjectCard'
@@ -38,14 +38,14 @@ export default async function HomePage() {
               href="/constellations" 
               className="inline-flex items-center justify-center px-6 py-3 border border-border rounded-lg hover:bg-secondary transition-colors"
             >
-              <Telescope className="w-5 h-5 mr-2" />
+              <Sparkles className="w-5 h-5 mr-2" />
               View Constellations
             </Link>
             <Link 
               href="/galaxies" 
               className="inline-flex items-center justify-center px-6 py-3 border border-border rounded-lg hover:bg-secondary transition-colors"
             >
-              <Galaxy className="w-5 h-5 mr-2" />
+              <Globe className="w-5 h-5 mr-2" />
               Discover Galaxies
             </Link>
           </div>
@@ -71,7 +71,7 @@ export default async function HomePage() {
             {featuredConstellation && (
               <div>
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Telescope className="w-5 h-5 mr-2 text-purple-400" />
+                  <Sparkles className="w-5 h-5 mr-2 text-purple-400" />
                   Featured Constellation
                 </h3>
                 <ObjectCard object={featuredConstellation} type="constellation" />
@@ -81,7 +81,7 @@ export default async function HomePage() {
             {featuredGalaxy && (
               <div>
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Galaxy className="w-5 h-5 mr-2 text-pink-400" />
+                  <Globe className="w-5 h-5 mr-2 text-pink-400" />
                   Featured Galaxy
                 </h3>
                 <ObjectCard object={featuredGalaxy} type="galaxy" />

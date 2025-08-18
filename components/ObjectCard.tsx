@@ -8,14 +8,17 @@ interface ObjectCardProps {
 
 export default function ObjectCard({ object, type }: ObjectCardProps) {
   const getObjectImage = () => {
-    if (type === 'star' && 'metadata' in object && object.metadata?.image?.imgix_url) {
-      return object.metadata.image.imgix_url;
+    if (type === 'star' && 'metadata' in object) {
+      const starObject = object as Star;
+      return starObject.metadata?.image?.imgix_url || null;
     }
-    if (type === 'constellation' && 'metadata' in object && object.metadata?.star_map?.imgix_url) {
-      return object.metadata.star_map.imgix_url;
+    if (type === 'constellation' && 'metadata' in object) {
+      const constellationObject = object as Constellation;
+      return constellationObject.metadata?.star_map?.imgix_url || null;
     }
-    if (type === 'galaxy' && 'metadata' in object && object.metadata?.image?.imgix_url) {
-      return object.metadata.image.imgix_url;
+    if (type === 'galaxy' && 'metadata' in object) {
+      const galaxyObject = object as Galaxy;
+      return galaxyObject.metadata?.image?.imgix_url || null;
     }
     return null;
   };
@@ -56,34 +59,55 @@ export default function ObjectCard({ object, type }: ObjectCardProps) {
           
           {type === 'star' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {'metadata' in object && object.metadata?.magnitude && (
-                <span>Magnitude: {object.metadata.magnitude}</span>
-              )}
-              {'metadata' in object && object.metadata?.spectral_class?.value && (
-                <span>Type: {object.metadata.spectral_class.value}</span>
-              )}
+              {(() => {
+                const starObject = object as Star;
+                return (
+                  <>
+                    {starObject.metadata?.magnitude && (
+                      <span>Magnitude: {starObject.metadata.magnitude}</span>
+                    )}
+                    {starObject.metadata?.spectral_class?.value && (
+                      <span>Type: {starObject.metadata.spectral_class.value}</span>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           )}
           
           {type === 'constellation' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {'metadata' in object && object.metadata?.hemisphere?.value && (
-                <span>Hemisphere: {object.metadata.hemisphere.value}</span>
-              )}
-              {'metadata' in object && object.metadata?.best_viewing_season?.value && (
-                <span>Best: {object.metadata.best_viewing_season.value}</span>
-              )}
+              {(() => {
+                const constellationObject = object as Constellation;
+                return (
+                  <>
+                    {constellationObject.metadata?.hemisphere?.value && (
+                      <span>Hemisphere: {constellationObject.metadata.hemisphere.value}</span>
+                    )}
+                    {constellationObject.metadata?.best_viewing_season?.value && (
+                      <span>Best: {constellationObject.metadata.best_viewing_season.value}</span>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           )}
           
           {type === 'galaxy' && (
             <div className="flex justify-between text-xs text-muted-foreground">
-              {'metadata' in object && object.metadata?.galaxy_type?.value && (
-                <span>Type: {object.metadata.galaxy_type.value}</span>
-              )}
-              {'metadata' in object && object.metadata?.distance && (
-                <span>Distance: {object.metadata.distance}</span>
-              )}
+              {(() => {
+                const galaxyObject = object as Galaxy;
+                return (
+                  <>
+                    {galaxyObject.metadata?.galaxy_type?.value && (
+                      <span>Type: {galaxyObject.metadata.galaxy_type.value}</span>
+                    )}
+                    {galaxyObject.metadata?.distance && (
+                      <span>Distance: {galaxyObject.metadata.distance}</span>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           )}
         </div>

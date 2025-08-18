@@ -26,4 +26,27 @@
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Mobile responsive improvements */
+  @media (max-width: 768px) {
+    .max-w-6xl {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
+
+@layer components {
+  /* Mobile-first responsive utilities */
+  .container-mobile {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .space-mobile {
+    @apply space-y-4 sm:space-y-6;
+  }
 }

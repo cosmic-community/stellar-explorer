@@ -405,7 +405,7 @@ export default function StarGame({ constellations }: StarGameProps) {
         </svg>
 
         {/* Render stars */}
-        {gameState.currentConstellation && gameState.currentConstellation.stars.map((star) => (
+        {gameState.currentConstellation.stars.map((star) => (
           <button
             key={star.id}
             onClick={() => handleStarClick(star.id)}

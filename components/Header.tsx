@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Star, Sparkles, Globe, Menu, X } from 'lucide-react'
+import { Star, Sparkles, Globe, Menu, X, Gamepad2 } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Header() {
@@ -69,6 +69,13 @@ export default function Header() {
               <Globe className="w-4 h-4" />
               <span>Galaxies</span>
             </Link>
+            <Link 
+              href="/star-game" 
+              className={getLinkClasses('/star-game')}
+            >
+              <Gamepad2 className="w-4 h-4" />
+              <span>Star Game</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,6 +119,14 @@ export default function Header() {
               >
                 <Globe className="w-5 h-5" />
                 <span>Galaxies</span>
+              </Link>
+              <Link 
+                href="/star-game" 
+                className={getMobileLinkClasses('/star-game')}
+                onClick={closeMobileMenu}
+              >
+                <Gamepad2 className="w-5 h-5" />
+                <span>Star Game</span>
               </Link>
             </div>
           </div>

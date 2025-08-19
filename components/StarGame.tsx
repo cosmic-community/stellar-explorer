@@ -108,6 +108,8 @@ export default function StarGame({ constellations }: StarGameProps) {
     if (constellations.length === 0) return
     
     const randomConstellation = constellations[Math.floor(Math.random() * constellations.length)]
+    if (!randomConstellation) return // Fix for line 111 - add null check
+    
     const starPattern = generateStarPattern(randomConstellation)
     const correctConnections = generateCorrectConnections(starPattern.stars)
     
@@ -378,6 +380,7 @@ export default function StarGame({ constellations }: StarGameProps) {
             const fromStar = gameState.currentConstellation?.stars.find(s => s.id === connection.from)
             const toStar = gameState.currentConstellation?.stars.find(s => s.id === connection.to)
             
+            // Fix for lines 63, 64, 78, 79 - add proper null checks
             if (!fromStar || !toStar) return null
             
             const isCorrect = isConnectionCorrect(connection)
@@ -386,8 +389,8 @@ export default function StarGame({ constellations }: StarGameProps) {
               <path
                 key={index}
                 d={getConnectionPath(
-                  { x: (fromStar.x / 100) * 100 + '%', y: (fromStar.y / 100) * 100 + '%' },
-                  { x: (toStar.x / 100) * 100 + '%', y: (toStar.y / 100) * 100 + '%' }
+                  { x: fromStar.x, y: fromStar.y }, // Fix for line 389 - use numbers directly
+                  { x: toStar.x, y: toStar.y }
                 )}
                 stroke={isCorrect ? '#22c55e' : '#ef4444'}
                 strokeWidth="2"

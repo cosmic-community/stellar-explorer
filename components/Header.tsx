@@ -1,11 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Star, Sparkles, Globe, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -13,6 +15,26 @@ export default function Header() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
+  }
+
+  const isActive = (path: string) => {
+    return pathname.startsWith(path)
+  }
+
+  const getLinkClasses = (path: string) => {
+    const baseClasses = "flex items-center space-x-1 transition-colors"
+    const activeClasses = "text-blue-400 font-medium"
+    const inactiveClasses = "text-muted-foreground hover:text-foreground"
+    
+    return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`
+  }
+
+  const getMobileLinkClasses = (path: string) => {
+    const baseClasses = "flex items-center space-x-2 transition-colors py-2"
+    const activeClasses = "text-blue-400 font-medium"
+    const inactiveClasses = "text-muted-foreground hover:text-foreground"
+    
+    return `${baseClasses} ${isActive(path) ? activeClasses : inactiveClasses}`
   }
 
   return (
@@ -28,21 +50,21 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-6">
             <Link 
               href="/stars" 
-              className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
+              className={getLinkClasses('/stars')}
             >
               <Star className="w-4 h-4" />
               <span>Stars</span>
             </Link>
             <Link 
               href="/constellations" 
-              className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
+              className={getLinkClasses('/constellations')}
             >
               <Sparkles className="w-4 h-4" />
               <span>Constellations</span>
             </Link>
             <Link 
               href="/galaxies" 
-              className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
+              className={getLinkClasses('/galaxies')}
             >
               <Globe className="w-4 h-4" />
               <span>Galaxies</span>
@@ -69,7 +91,7 @@ export default function Header() {
             <div className="flex flex-col space-y-4 pt-4">
               <Link 
                 href="/stars" 
-                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors py-2"
+                className={getMobileLinkClasses('/stars')}
                 onClick={closeMobileMenu}
               >
                 <Star className="w-5 h-5" />
@@ -77,7 +99,7 @@ export default function Header() {
               </Link>
               <Link 
                 href="/constellations" 
-                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors py-2"
+                className={getMobileLinkClasses('/constellations')}
                 onClick={closeMobileMenu}
               >
                 <Sparkles className="w-5 h-5" />
@@ -85,7 +107,7 @@ export default function Header() {
               </Link>
               <Link 
                 href="/galaxies" 
-                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors py-2"
+                className={getMobileLinkClasses('/galaxies')}
                 onClick={closeMobileMenu}
               >
                 <Globe className="w-5 h-5" />

@@ -377,7 +377,7 @@ export default function StarGame({ constellations }: StarGameProps) {
         <svg className="absolute inset-0 w-full h-full">
           {/* Render user connections */}
           {gameState.userConnections.map((connection, index) => {
-            // FIXED: Add null safety check for currentConstellation
+            // FIXED: Add null safety check for currentConstellation and stars
             if (!gameState.currentConstellation) return null
             
             const fromStar = gameState.currentConstellation.stars.find(s => s.id === connection.from)

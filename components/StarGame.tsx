@@ -395,8 +395,8 @@ export default function StarGame({ constellations }: StarGameProps) {
               <path
                 key={index}
                 d={getConnectionPath(
-                  { x: fromStar.x, y: fromStar.y },
-                  { x: toStar.x, y: toStar.y }
+                  { x: fromStar!.x, y: fromStar!.y },
+                  { x: toStar!.x, y: toStar!.y }
                 )}
                 stroke={isCorrect ? '#22c55e' : '#ef4444'}
                 strokeWidth="2"

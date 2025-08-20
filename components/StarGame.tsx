@@ -153,7 +153,8 @@ export default function StarGame({ constellations }: StarGameProps) {
 
   // Timer effect
   useEffect(() => {
-    let timer: NodeJS.Timeout
+    // Ensure timer is possibly undefined and handled safely
+    let timer: ReturnType<typeof setTimeout> | undefined
     
     if (gameState.isPlaying && gameState.timeLeft > 0) {
       timer = setTimeout(() => {
@@ -170,7 +171,9 @@ export default function StarGame({ constellations }: StarGameProps) {
       }))
     }
     
-    return () => clearTimeout(timer)
+    return () => {
+      if (timer) clearTimeout(timer)
+    }
   }, [gameState.isPlaying, gameState.timeLeft])
 
   const handleStarClick = (starId: string) => {
@@ -193,7 +196,7 @@ export default function StarGame({ constellations }: StarGameProps) {
       const newConnection = {
         from: gameState.selectedStar,
         to: starId,
-      }
+      } as { from: string; to: string } // safe due to control flow above
       
       // Check if connection already exists
       const connectionExists = gameState.userConnections.some(conn =>
@@ -377,13 +380,13 @@ export default function StarGame({ constellations }: StarGameProps) {
         <svg className="absolute inset-0 w-full h-full">
           {/* Render user connections */}
           {gameState.userConnections.map((connection, index) => {
-            // FIXED: Add null safety check for currentConstellation and stars
+            // Add null safety check for currentConstellation and stars
             if (!gameState.currentConstellation) return null
             
             const fromStar = gameState.currentConstellation.stars.find(s => s.id === connection.from)
             const toStar = gameState.currentConstellation.stars.find(s => s.id === connection.to)
             
-            // FIXED: Add null safety checks for stars
+            // Add null safety checks for stars
             if (!fromStar || !toStar) return null
             
             const isCorrect = isConnectionCorrect(connection)
@@ -405,7 +408,7 @@ export default function StarGame({ constellations }: StarGameProps) {
         </svg>
 
         {/* Render stars */}
-        {gameState.currentConstellation.stars.map((star) => (
+        {gameState.currentConstellation?.stars.map((star) => (
           <button
             key={star.id}
             onClick={() => handleStarClick(star.id)}
